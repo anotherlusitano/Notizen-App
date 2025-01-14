@@ -15,7 +15,7 @@ final router = GoRouter(
     GoRoute(
       name: Routes.login.name,
       path: '/login',
-      builder: (context, state) => const LoginActivity(),
+      builder: (context, state) => LoginActivity(),
     ),
     GoRoute(
       name: Routes.signUp.name,
