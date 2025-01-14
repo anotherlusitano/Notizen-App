@@ -20,7 +20,7 @@ final router = GoRouter(
     GoRoute(
       name: Routes.signUp.name,
       path: '/sign-up',
-      builder: (context, state) => const SignUpActivity(),
+      builder: (context, state) => SignUpActivity(),
     ),
     GoRoute(
       name: Routes.home.name,
