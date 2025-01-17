@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:notizen/data/user.dart';
+import 'package:notizen/data/user_repository.dart';
+import 'package:notizen/widgets/snackbar.dart';
 
 import '../config/router.dart';
 
@@ -47,12 +50,25 @@ class SignUpActivity extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: ElevatedButton.icon(
-                  onPressed: () {
-                    debugPrint(_passwordController.text);
-                    debugPrint(_usernameController.text);
-                    if (_passwordController.text.trim().isEmpty || _usernameController.text.trim().isEmpty) return;
+                  onPressed: () async {
+                    final String password = _passwordController.text;
+                    final String username = _usernameController.text;
 
-                    // TODO: create local authentication
+                    if (password.trim().isEmpty || username.trim().isEmpty) return;
+
+                    final userFound = await UsersRepository.instance.getLocalAccount(username);
+
+                    if (userFound != null) {
+                      if (!context.mounted) return;
+                      return SnackMsg.showInfo(context, 'Este utilizador já existe!');
+                    }
+
+                    final user = User(username, password, 1);
+
+                    UsersRepository.instance.createLocalAccount(user);
+
+                    if (!context.mounted) return;
+                    SnackMsg.showOk(context, 'Utilizador criado. Bem-vindo $username!');
 
                     context.goNamed(Routes.home.name);
                   },

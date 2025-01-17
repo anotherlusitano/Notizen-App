@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:notizen/data/user.dart';
+import 'package:notizen/data/user_repository.dart';
+import 'package:notizen/widgets/snackbar.dart';
 
 import '../config/router.dart';
 
@@ -45,14 +48,24 @@ class LoginActivity extends StatelessWidget {
                 ),
               ),
               ElevatedButton.icon(
-                onPressed: () {
-                  debugPrint(_passwordController.text);
-                  debugPrint(_usernameController.text);
-                  if (_passwordController.text.trim().isEmpty || _usernameController.text.trim().isEmpty) return;
+                onPressed: () async {
+                  final String password = _passwordController.text;
+                  final String username = _usernameController.text;
 
-                  // TODO: create local authentication
+                  if (password.trim().isEmpty || username.trim().isEmpty) return;
 
-                  context.goNamed(Routes.home.name);
+                  final user = User(username, password, 0);
+
+                  final userFound = await UsersRepository.instance.loginLocalAccount(user);
+
+                  if (userFound) {
+                    if (!context.mounted) return;
+                    SnackMsg.showOk(context, 'Bem-vindo $username!');
+                    return context.goNamed(Routes.home.name);
+                  }
+
+                  if (!context.mounted) return;
+                  SnackMsg.showError(context, 'Palavra-passe ou username errado!');
                 },
                 icon: Icon(Icons.login),
                 label: Text("Entrar"),
