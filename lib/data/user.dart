@@ -2,11 +2,11 @@ import 'package:crypto/crypto.dart';
 import 'dart:convert';
 
 class User {
-  String? username;
-  String? password;
+  String username;
+  String password;
   int loggenIn = 0;
 
-  User(String this.username, String this.password, this.loggenIn);
+  User(this.username, this.password, this.loggenIn);
 
   Map<String, Object?> toMap() {
     return {
@@ -17,7 +17,7 @@ class User {
   }
 
   void encryptPassword() {
-    var bytes = utf8.encode(password!);
+    var bytes = utf8.encode(password);
     password = sha256.convert(bytes).toString();
   }
 

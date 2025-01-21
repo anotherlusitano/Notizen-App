@@ -44,7 +44,7 @@ class UsersRepository {
   }
 
   Future<bool> loginLocalAccount(User user) async {
-    final userExist = await getLocalAccount(user.username!);
+    final userExist = await getLocalAccount(user.username);
 
     if (userExist == null) return false;
 
