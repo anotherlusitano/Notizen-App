@@ -14,7 +14,7 @@ class UsersRepository {
 
   Future<Database> initDatabase() async {
     return openDatabase(
-      join(await getDatabasesPath(), 'users_database.db'),
+      join(await getDatabasesPath(), 'notizen.db'),
       onCreate: (db, version) {
         return db.execute(
           '''
