@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:notizen/widgets/add_todo_button.dart';
 import 'package:notizen/widgets/category_filter.dart';
 import 'package:notizen/widgets/todo_box.dart';
 
@@ -23,24 +24,7 @@ class HomeActivity extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: ElevatedButton(
-        onPressed: () => (),
-        style: ButtonStyle(
-          shape: WidgetStatePropertyAll(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(5)),
-            ),
-          ),
-          backgroundColor: WidgetStatePropertyAll(Colors.lightBlue),
-        ),
-        child: Text(
-          "+",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-          ),
-        ),
-      ),
+      floatingActionButton: AddTodoButton(),
       body: SafeArea(
         child: Center(
           child: Column(
