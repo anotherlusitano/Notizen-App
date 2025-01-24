@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:notizen/data/todo.dart';
-import 'package:notizen/data/todo_repositoy.dart';
+import 'package:go_router/go_router.dart';
+import 'package:notizen/config/router.dart';
 
 class AddTodoButton extends StatelessWidget {
   const AddTodoButton({
@@ -10,9 +10,8 @@ class AddTodoButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () async {
-        final todo = Todo("Fazer o trabalho de sistemas digitais", "trabalho", 0);
-        await TodosRepository.instance.createTodo(todo);
+      onPressed: () {
+        context.goNamed(Routes.todo.name);
       },
       style: ButtonStyle(
         shape: WidgetStatePropertyAll(
