@@ -32,7 +32,10 @@ class HomeActivity extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              CategoryFilter(),
+              SizedBox(
+                height: 50.0,
+                child: CategoryFilter(),
+              ),
               Expanded(
                 child: FutureBuilder(
                     future: TodosRepository.instance.getTodos(),
