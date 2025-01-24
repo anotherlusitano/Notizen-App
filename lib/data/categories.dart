@@ -1,0 +1,15 @@
+enum Category {
+  todas,
+  trabalho,
+  pessoal,
+  estudo,
+  tecnologia,
+  jardinagem,
+  culinaria,
+  arte,
+  musica,
+  jogos,
+  desporto,
+  mecanica,
+  roubo,
+}
