@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:notizen/data/todo.dart';
+import 'package:notizen/data/todo_repositoy.dart';
 
 class TodoBox extends StatefulWidget {
+  final Todo todo;
+  final int index;
+
   const TodoBox({
     super.key,
+    required this.todo,
+    required this.index,
   });
 
   @override
@@ -10,15 +17,18 @@ class TodoBox extends StatefulWidget {
 }
 
 class _TodoBoxState extends State<TodoBox> {
-  bool isDone = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: ElevatedButton(
-        onPressed: () => setState(() {
-          isDone = !isDone;
-        }),
+        onPressed: () async {
+          widget.todo.isDone = 1 - widget.todo.isDone;
+
+          await TodosRepository.instance.updateTodoToDone(widget.todo, widget.index);
+
+          setState(() {});
+        },
         style: ButtonStyle(
           shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(
@@ -33,17 +43,17 @@ class _TodoBoxState extends State<TodoBox> {
             ),
           ),
           backgroundColor: WidgetStateProperty.resolveWith((_) {
-            if (isDone) {
+            if (widget.todo.isDone.isOdd) {
               return Colors.white10;
             }
             return Colors.white30;
           }),
         ),
         child: Text(
-          "HOME",
+          widget.todo.name,
           style: TextStyle(
-            color: isDone ? Colors.black54 : Colors.black,
-            decoration: isDone ? TextDecoration.lineThrough : TextDecoration.none,
+            color: widget.todo.isDone.isOdd ? Colors.black54 : Colors.black,
+            decoration: widget.todo.isDone.isOdd ? TextDecoration.lineThrough : TextDecoration.none,
           ),
         ),
       ),
