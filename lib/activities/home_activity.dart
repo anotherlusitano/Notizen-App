@@ -15,6 +15,7 @@ class HomeActivity extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Tarefas"),
+        backgroundColor: Colors.blue,
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
