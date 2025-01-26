@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:notizen/data/todo.dart';
 import 'package:notizen/data/todo_repositoy.dart';
 import 'package:notizen/widgets/add_todo_button.dart';
 import 'package:notizen/widgets/category_filter.dart';
@@ -7,8 +8,15 @@ import 'package:notizen/widgets/todo_box.dart';
 
 import '../config/router.dart';
 
-class HomeActivity extends StatelessWidget {
+class HomeActivity extends StatefulWidget {
   const HomeActivity({super.key});
+
+  @override
+  State<HomeActivity> createState() => _HomeActivityState();
+}
+
+class _HomeActivityState extends State<HomeActivity> {
+  List<Todo> todos = [];
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +25,15 @@ class HomeActivity extends StatelessWidget {
         title: Text("Tarefas"),
         backgroundColor: Colors.blue,
         actions: [
+          todos.any((todo) => todo.isDone.isOdd)
+              ? Padding(
+                  padding: const EdgeInsets.only(right: 10.0),
+                  child: IconButton(
+                    onPressed: () => (),
+                    icon: Icon(Icons.delete),
+                  ),
+                )
+              : SizedBox(),
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child: IconButton(
@@ -42,12 +59,24 @@ class HomeActivity extends StatelessWidget {
                     future: TodosRepository.instance.getTodos(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
+                        todos = snapshot.data!;
+
                         return ListView.builder(
                             itemCount: snapshot.data!.length,
                             itemBuilder: (BuildContext context, int index) {
-                              final todo = snapshot.data![index];
+                              var todo = snapshot.data![index];
 
-                              return TodoBox(todo: todo, index: index + 1);
+                              callback() {
+                                setState(() async {
+                                  todo.isDone = 1 - todo.isDone;
+
+                                  await TodosRepository.instance.updateTodoToDone(todo, index + 1);
+
+                                  setState(() {});
+                                });
+                              }
+
+                              return TodoBox(todo: todo, callBack: callback);
                             });
                       } else {
                         return SizedBox();

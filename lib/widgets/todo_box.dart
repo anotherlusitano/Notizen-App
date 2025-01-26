@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:notizen/data/todo.dart';
-import 'package:notizen/data/todo_repositoy.dart';
 
 class TodoBox extends StatefulWidget {
   final Todo todo;
-  final int index;
+  final Function() callBack;
 
   const TodoBox({
     super.key,
     required this.todo,
-    required this.index,
+    required this.callBack,
   });
 
   @override
@@ -22,13 +21,7 @@ class _TodoBoxState extends State<TodoBox> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: ElevatedButton(
-        onPressed: () async {
-          widget.todo.isDone = 1 - widget.todo.isDone;
-
-          await TodosRepository.instance.updateTodoToDone(widget.todo, widget.index);
-
-          setState(() {});
-        },
+        onPressed: () async => await widget.callBack(),
         style: ButtonStyle(
           shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(
