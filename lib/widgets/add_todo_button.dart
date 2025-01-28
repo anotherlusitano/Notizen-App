@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:notizen/config/router.dart';
 
 class AddTodoButton extends StatelessWidget {
+  final Function() goAddTodo;
+
   const AddTodoButton({
     super.key,
+    required this.goAddTodo,
   });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        context.goNamed(Routes.todo.name);
-      },
+      onPressed: () => goAddTodo(),
       style: ButtonStyle(
         shape: WidgetStatePropertyAll(
           RoundedRectangleBorder(

@@ -21,7 +21,7 @@ class _TodoBoxState extends State<TodoBox> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: ElevatedButton(
-        onPressed: () async => await widget.callBack(),
+        onPressed: () => widget.callBack(),
         style: ButtonStyle(
           shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(

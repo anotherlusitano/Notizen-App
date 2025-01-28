@@ -25,15 +25,33 @@ class _HomeActivityState extends State<HomeActivity> {
         title: Text("Tarefas"),
         backgroundColor: Colors.blue,
         actions: [
-          todos.any((todo) => todo.isDone.isOdd)
-              ? Padding(
-                  padding: const EdgeInsets.only(right: 10.0),
-                  child: IconButton(
-                    onPressed: () => (),
-                    icon: Icon(Icons.delete),
-                  ),
-                )
-              : SizedBox(),
+          // HACK: we fetch the Todos again so when we go to another page it doesn't hide the DeleteButton
+          // yes its bad code but this isn't a professional app so idc
+          FutureBuilder(
+            future: TodosRepository.instance.getTodos(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                todos = snapshot.data!;
+
+                return todos.any((todo) => todo.isDone.isOdd)
+                    ? IconButton(
+                        onPressed: () async {
+                          for (final todo in todos) {
+                            if (todo.isDone.isOdd) {
+                              await TodosRepository.instance.deleteTodo(todo.id);
+                            }
+                          }
+
+                          setState(() {});
+                        },
+                        icon: Icon(Icons.delete),
+                      )
+                    : SizedBox();
+              } else {
+                return SizedBox();
+              }
+            },
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child: IconButton(
@@ -43,7 +61,12 @@ class _HomeActivityState extends State<HomeActivity> {
           ),
         ],
       ),
-      floatingActionButton: AddTodoButton(),
+      floatingActionButton: AddTodoButton(goAddTodo: () {
+        context.goNamed(
+          Routes.todo.name,
+          pathParameters: {'todoId': todos.length.toString()},
+        );
+      }),
       body: SafeArea(
         child: Center(
           child: Column(
@@ -67,12 +90,12 @@ class _HomeActivityState extends State<HomeActivity> {
                               var todo = snapshot.data![index];
 
                               callback() {
-                                setState(() async {
+                                setState(() {
                                   todo.isDone = 1 - todo.isDone;
 
-                                  await TodosRepository.instance.updateTodoToDone(todo, index + 1);
-
-                                  setState(() {});
+                                  TodosRepository.instance.updateTodoToDone(todo, todo.id).then((_) {
+                                    setState(() {});
+                                  });
                                 });
                               }
 
