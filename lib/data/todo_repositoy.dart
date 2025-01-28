@@ -14,12 +14,12 @@ class TodosRepository {
 
   Future<Database> initDatabase() async {
     return openDatabase(
-      join(await getDatabasesPath(), 'notizen.db'),
+      join(await getDatabasesPath(), 'todos.db'),
       onCreate: (db, version) {
         return db.execute(
           '''
           CREATE TABLE todos(
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id INTEGER PRIMARY KEY NOT NULL,
             name TEXT NOT NULL,
             category TEXT NOT NULL,
             isDone BOOLEAN NOT NULL
@@ -71,6 +71,7 @@ class TodosRepository {
     for (var row in result) {
       todos.add(
         Todo(
+          row['id'],
           row['name'],
           row['category'],
           row['isDone'],

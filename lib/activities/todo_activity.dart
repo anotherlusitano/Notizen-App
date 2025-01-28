@@ -9,7 +9,12 @@ import '../config/router.dart';
 List<String> categories = Category.values.map((e) => e.name).toList();
 
 class TodoActivity extends StatefulWidget {
-  const TodoActivity({super.key});
+  final String? todoId;
+
+  const TodoActivity({
+    super.key,
+    this.todoId,
+  });
 
   @override
   State<TodoActivity> createState() => _TodoActivityState();
@@ -76,7 +81,9 @@ class _TodoActivityState extends State<TodoActivity> {
 
                     if (todoText.trim().isEmpty) return;
 
-                    final todo = Todo(todoText, category, 0);
+                    int todoId = int.parse(widget.todoId!);
+
+                    final todo = Todo(todoId, todoText, category, 0);
                     await TodosRepository.instance.createTodo(todo);
 
                     if (!context.mounted) return;
