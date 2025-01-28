@@ -14,7 +14,7 @@ class UsersRepository {
 
   Future<Database> initDatabase() async {
     return openDatabase(
-      join(await getDatabasesPath(), 'notizen.db'),
+      join(await getDatabasesPath(), 'users.db'),
       onCreate: (db, version) {
         return db.execute(
           '''
@@ -23,7 +23,7 @@ class UsersRepository {
             username TEXT NOT NULL,
             password TEXT NOT NULL,
             loggenIn BOOLEAN NOT NULL
-          )
+          );
           ''',
         );
       },
