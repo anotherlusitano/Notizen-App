@@ -70,7 +70,10 @@ class SignUpActivity extends StatelessWidget {
                     if (!context.mounted) return;
                     SnackMsg.showOk(context, 'Utilizador criado. Bem-vindo $username!');
 
-                    context.goNamed(Routes.home.name);
+                    return context.goNamed(
+                      Routes.home.name,
+                      pathParameters: {'username': username},
+                    );
                   },
                   icon: Icon(Icons.create),
                   label: Text("Criar"),

@@ -57,6 +57,19 @@ class UsersRepository {
     return true;
   }
 
+  Future<void> logoutLocalAccount(User user) async {
+    final db = await initDatabase();
+
+    user.loggenIn = 0;
+
+    await db.update(
+      'users',
+      user.toMap(),
+      where: 'username = ?',
+      whereArgs: [user.username],
+    );
+  }
+
   Future<User?> getLocalAccount(String username) async {
     final db = await initDatabase();
 

@@ -61,7 +61,10 @@ class LoginActivity extends StatelessWidget {
                   if (userFound) {
                     if (!context.mounted) return;
                     SnackMsg.showOk(context, 'Bem-vindo $username!');
-                    return context.goNamed(Routes.home.name);
+                    return context.goNamed(
+                      Routes.home.name,
+                      pathParameters: {'username': username},
+                    );
                   }
 
                   if (!context.mounted) return;

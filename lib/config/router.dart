@@ -26,8 +26,10 @@ final router = GoRouter(
     ),
     GoRoute(
       name: Routes.home.name,
-      path: '/home',
-      builder: (context, state) => const HomeActivity(),
+      path: '/home/:username',
+      builder: (context, state) => HomeActivity(
+        username: state.pathParameters['username'],
+      ),
     ),
     GoRoute(
       name: Routes.todo.name,
