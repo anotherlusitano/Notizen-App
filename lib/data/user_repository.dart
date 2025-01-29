@@ -54,6 +54,17 @@ class UsersRepository {
       return false;
     }
 
+    final db = await initDatabase();
+
+    user.loggenIn = 1;
+
+    await db.update(
+      'users',
+      user.toMap(),
+      where: 'username = ?',
+      whereArgs: [user.username],
+    );
+
     return true;
   }
 
