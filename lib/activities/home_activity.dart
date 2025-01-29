@@ -23,6 +23,7 @@ class HomeActivity extends StatefulWidget {
 
 class _HomeActivityState extends State<HomeActivity> {
   List<Todo> todos = [];
+  String category = "todas";
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class _HomeActivityState extends State<HomeActivity> {
           // HACK: we fetch the Todos again so when we go to another page it doesn't hide the DeleteButton
           // yes its bad code but this isn't a professional app so idc
           FutureBuilder(
-            future: TodosRepository.instance.getTodos(widget.username!),
+            future: TodosRepository.instance.getTodos(widget.username!, category),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 todos = snapshot.data!;
@@ -91,11 +92,11 @@ class _HomeActivityState extends State<HomeActivity> {
             children: [
               SizedBox(
                 height: 50.0,
-                child: CategoryFilter(),
+                child: CategoryFilter(callback: (val) => setState(() => category = val)),
               ),
               Expanded(
                 child: FutureBuilder(
-                    future: TodosRepository.instance.getTodos(widget.username!),
+                    future: TodosRepository.instance.getTodos(widget.username!, category),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         todos = snapshot.data!;

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class CategoryBox extends StatelessWidget {
   final String text;
+  final Function selectCategory;
 
   const CategoryBox({
     super.key,
     required this.text,
+    required this.selectCategory,
   });
 
   @override
@@ -13,7 +15,7 @@ class CategoryBox extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 8.0),
       child: GestureDetector(
-        onTap: () => print("object"),
+        onTap: () => selectCategory(text),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 5.0),
           decoration: BoxDecoration(

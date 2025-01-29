@@ -63,10 +63,12 @@ class TodosRepository {
     );
   }
 
-  Future<List<Todo>> getTodos(String owner) async {
+  Future<List<Todo>> getTodos(String owner, String category) async {
     final db = await initDatabase();
 
-    List<Map> result = await db.rawQuery("SELECT * FROM todos WHERE owner = '$owner'");
+    List<Map> result = category == 'todas'
+        ? await db.rawQuery("SELECT * FROM todos WHERE owner = '$owner'")
+        : await db.rawQuery("SELECT * FROM todos WHERE owner = '$owner' AND category = '$category'");
 
     List<Todo> todos = [];
     for (var row in result) {

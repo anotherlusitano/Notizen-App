@@ -3,8 +3,11 @@ import 'package:notizen/data/categories.dart';
 import 'package:notizen/widgets/category_box.dart';
 
 class CategoryFilter extends StatelessWidget {
+  final Function callback;
+
   CategoryFilter({
     super.key,
+    required this.callback,
   });
 
   final List<String> categories = Category.values.map((e) => e.name).toList();
@@ -18,7 +21,7 @@ class CategoryFilter extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemCount: categories.length,
           itemBuilder: (BuildContext context, int index) {
-            return CategoryBox(text: categories[index]);
+            return CategoryBox(text: categories[index], selectCategory: callback);
           },
         ),
       ),
