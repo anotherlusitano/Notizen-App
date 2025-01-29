@@ -33,9 +33,10 @@ final router = GoRouter(
     ),
     GoRoute(
       name: Routes.todo.name,
-      path: '/todo/:todoId',
+      path: '/todo/:todoId/:todoOwner',
       builder: (context, state) => TodoActivity(
         todoId: state.pathParameters['todoId'],
+        todoOwner: state.pathParameters['todoOwner'],
       ),
     ),
   ],

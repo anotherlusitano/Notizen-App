@@ -20,6 +20,7 @@ class TodosRepository {
           '''
           CREATE TABLE todos(
             id INTEGER PRIMARY KEY NOT NULL,
+            owner TEXT NOT NULL,
             name TEXT NOT NULL,
             category TEXT NOT NULL,
             isDone BOOLEAN NOT NULL
@@ -62,16 +63,17 @@ class TodosRepository {
     );
   }
 
-  Future<List<Todo>> getTodos() async {
+  Future<List<Todo>> getTodos(String owner) async {
     final db = await initDatabase();
 
-    List<Map> result = await db.rawQuery('SELECT * FROM todos');
+    List<Map> result = await db.rawQuery("SELECT * FROM todos WHERE owner = '$owner'");
 
     List<Todo> todos = [];
     for (var row in result) {
       todos.add(
         Todo(
           row['id'],
+          row['owner'],
           row['name'],
           row['category'],
           row['isDone'],

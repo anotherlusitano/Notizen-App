@@ -34,7 +34,7 @@ class _HomeActivityState extends State<HomeActivity> {
           // HACK: we fetch the Todos again so when we go to another page it doesn't hide the DeleteButton
           // yes its bad code but this isn't a professional app so idc
           FutureBuilder(
-            future: TodosRepository.instance.getTodos(),
+            future: TodosRepository.instance.getTodos(widget.username!),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 todos = snapshot.data!;
@@ -77,7 +77,10 @@ class _HomeActivityState extends State<HomeActivity> {
       floatingActionButton: AddTodoButton(goAddTodo: () {
         context.goNamed(
           Routes.todo.name,
-          pathParameters: {'todoId': todos.length.toString()},
+          pathParameters: {
+            'todoId': todos.length.toString(),
+            'todoOwner': widget.username!,
+          },
         );
       }),
       body: SafeArea(
@@ -92,7 +95,7 @@ class _HomeActivityState extends State<HomeActivity> {
               ),
               Expanded(
                 child: FutureBuilder(
-                    future: TodosRepository.instance.getTodos(),
+                    future: TodosRepository.instance.getTodos(widget.username!),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         todos = snapshot.data!;

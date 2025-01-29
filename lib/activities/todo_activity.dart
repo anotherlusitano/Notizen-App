@@ -10,10 +10,12 @@ List<String> categories = Category.values.map((e) => e.name).toList();
 
 class TodoActivity extends StatefulWidget {
   final String? todoId;
+  final String? todoOwner;
 
   const TodoActivity({
     super.key,
     this.todoId,
+    this.todoOwner,
   });
 
   @override
@@ -36,7 +38,10 @@ class _TodoActivityState extends State<TodoActivity> {
         leading: Padding(
           padding: const EdgeInsets.only(right: 10.0),
           child: IconButton(
-            onPressed: () => context.goNamed(Routes.home.name),
+            onPressed: () => context.goNamed(
+              Routes.home.name,
+              pathParameters: {'username': widget.todoOwner!},
+            ),
             icon: Icon(Icons.arrow_back),
           ),
         ),
@@ -83,12 +88,15 @@ class _TodoActivityState extends State<TodoActivity> {
 
                     int todoId = int.parse(widget.todoId!);
 
-                    final todo = Todo(todoId, todoText, category, 0);
+                    final todo = Todo(todoId, widget.todoOwner!, todoText, category, 0);
                     await TodosRepository.instance.createTodo(todo);
 
                     if (!context.mounted) return;
 
-                    context.goNamed(Routes.home.name);
+                    context.goNamed(
+                      Routes.home.name,
+                      pathParameters: {'username': widget.todoOwner!},
+                    );
                   },
                   icon: Icon(Icons.create),
                   label: Text("Criar tarefa"),
