@@ -19,7 +19,7 @@ class TodosRepository {
         return db.execute(
           '''
           CREATE TABLE todos(
-            id INTEGER PRIMARY KEY NOT NULL,
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
             owner TEXT NOT NULL,
             name TEXT NOT NULL,
             category TEXT NOT NULL,
