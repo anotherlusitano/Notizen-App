@@ -19,7 +19,7 @@ class _TodoBoxState extends State<TodoBox> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      padding: EdgeInsetsDirectional.all(5.0),
       child: ElevatedButton(
         onPressed: () => widget.callBack(),
         style: ButtonStyle(
@@ -42,12 +42,25 @@ class _TodoBoxState extends State<TodoBox> {
             return Colors.white30;
           }),
         ),
-        child: Text(
-          widget.todo.name,
-          style: TextStyle(
-            color: widget.todo.isDone.isOdd ? Colors.black54 : Colors.black,
-            decoration: widget.todo.isDone.isOdd ? TextDecoration.lineThrough : TextDecoration.none,
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Text(
+                widget.todo.name,
+                style: TextStyle(
+                  color: widget.todo.isDone.isOdd ? Colors.black54 : Colors.black,
+                  decoration: widget.todo.isDone.isOdd ? TextDecoration.lineThrough : TextDecoration.none,
+                ),
+              ),
+            ),
+            IconButton(
+              onPressed: () => (),
+              icon: Icon(Icons.edit),
+              iconSize: 24,
+              color: Colors.blue,
+            ),
+          ],
         ),
       ),
     );
