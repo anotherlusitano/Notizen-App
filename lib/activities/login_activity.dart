@@ -6,11 +6,19 @@ import 'package:notizen/widgets/snackbar.dart';
 
 import '../config/router.dart';
 
-class LoginActivity extends StatelessWidget {
-  LoginActivity({super.key});
+class LoginActivity extends StatefulWidget {
+  const LoginActivity({super.key});
 
+  @override
+  State<LoginActivity> createState() => _LoginActivityState();
+}
+
+class _LoginActivityState extends State<LoginActivity> {
   final TextEditingController _passwordController = TextEditingController();
+
   final TextEditingController _usernameController = TextEditingController();
+
+  bool passwordIsHidden = true;
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +48,19 @@ class LoginActivity extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   controller: _passwordController,
+                  obscureText: passwordIsHidden,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: "Insere a tua password...",
                     hintStyle: Theme.of(context).textTheme.displaySmall,
+                    suffixIcon: InkWell(
+                      onTap: () => setState(() {
+                        passwordIsHidden = !passwordIsHidden;
+                      }),
+                      child: Icon(
+                        passwordIsHidden ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                      ),
+                    ),
                   ),
                 ),
               ),
