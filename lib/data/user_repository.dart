@@ -81,6 +81,23 @@ class UsersRepository {
     );
   }
 
+  Future<User?> anyoneLoggedIn() async {
+    final db = await initDatabase();
+
+    List<Map> result = await db.rawQuery('SELECT * FROM users WHERE loggenIn=1');
+
+    User? user;
+    for (var row in result) {
+      user = User(
+        row['username'],
+        row['password'],
+        row['loggenIn'],
+      );
+    }
+
+    return user;
+  }
+
   Future<User?> getLocalAccount(String username) async {
     final db = await initDatabase();
 

@@ -3,6 +3,7 @@ import 'package:notizen/activities/home_activity.dart';
 import 'package:notizen/activities/login_activity.dart';
 import 'package:notizen/activities/sign_up_activity.dart';
 import 'package:notizen/activities/todo_activity.dart';
+import 'package:notizen/data/user_repository.dart';
 
 enum Routes {
   todo,
@@ -18,6 +19,11 @@ final router = GoRouter(
       name: Routes.login.name,
       path: '/login',
       builder: (context, state) => LoginActivity(),
+      redirect: (context, state) {
+        return UsersRepository.instance.anyoneLoggedIn().then((user) {
+          return user == null ? '/login' : '/home/${user.username}';
+        });
+      },
     ),
     GoRoute(
       name: Routes.signUp.name,
