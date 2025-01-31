@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:notizen/data/categories.dart';
 import 'package:notizen/data/todo.dart';
+import 'package:notizen/data/todo_repositoy.dart';
 
 class TodoBox extends StatefulWidget {
   final Todo todo;
@@ -55,10 +57,79 @@ class _TodoBoxState extends State<TodoBox> {
               ),
             ),
             IconButton(
-              onPressed: () => (),
+              onPressed: () => editTodo(context, widget.todo),
               icon: Icon(Icons.edit),
               iconSize: 24,
               color: Colors.blue,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  editTodo(BuildContext context, Todo todo) {
+    List<String> categories = Category.values.map((e) => e.name).toList();
+
+    final TextEditingController textController = TextEditingController(
+      text: todo.name,
+    );
+
+    String category = todo.category;
+
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) => Dialog(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(height: 20.0),
+            Text("Editar tarefa"),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                controller: textController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: "Insira a tarefa...",
+                  hintStyle: Theme.of(context).textTheme.displaySmall,
+                ),
+              ),
+            ),
+            SizedBox(height: 20.0),
+            DropdownMenu(
+              initialSelection: category,
+              dropdownMenuEntries: categories.map<DropdownMenuEntry<String>>((String value) {
+                return DropdownMenuEntry<String>(
+                  value: value,
+                  label: value,
+                );
+              }).toList(),
+              label: Text("Categoria"),
+              onSelected: (String? value) {
+                category = value!;
+                setState(() {});
+              },
+            ),
+            TextButton(
+              onPressed: () async {
+                final String todoText = textController.text;
+
+                if (todoText.trim().isEmpty) return;
+
+                todo.name = todoText;
+                todo.category = category;
+
+                await TodosRepository.instance.updateTodo(todo);
+
+                if (!context.mounted) return;
+
+                Navigator.pop(context);
+
+                setState(() {});
+              },
+              child: const Text('Guardar'),
             ),
           ],
         ),

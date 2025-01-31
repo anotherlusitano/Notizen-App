@@ -53,6 +53,17 @@ class TodosRepository {
     );
   }
 
+  Future<void> updateTodo(Todo todo) async {
+    final db = await initDatabase();
+
+    await db.update(
+      'todos',
+      todo.toMap(),
+      where: 'id = ?',
+      whereArgs: [todo.id],
+    );
+  }
+
   Future<void> deleteTodo(int todoId) async {
     final db = await initDatabase();
 
