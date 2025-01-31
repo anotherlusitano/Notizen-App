@@ -74,37 +74,6 @@ class LoginActivity extends StatelessWidget {
                 label: Text("Entrar"),
               ),
               SizedBox(height: 20.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                spacing: 2.0,
-                children: [
-                  Expanded(
-                    child: Divider(
-                      thickness: 2,
-                      color: Colors.black54,
-                    ),
-                  ),
-                  Text(
-                    "ou então",
-                    style: Theme.of(context).textTheme.displaySmall,
-                  ),
-                  Expanded(
-                    child: Divider(
-                      thickness: 2,
-                      color: Colors.black54,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20.0),
-              ElevatedButton(
-                onPressed: () {
-                  // TODO: create google authentication
-
-                  context.goNamed(Routes.home.name);
-                },
-                child: Text("Botão do Google"),
-              ),
               TextButton(
                 onPressed: () => context.goNamed(Routes.signUp.name),
                 child: Text("Ainda não tens conta? Clica aqui!"),
