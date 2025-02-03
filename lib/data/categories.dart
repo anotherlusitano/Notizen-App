@@ -1,15 +1,22 @@
 enum Category {
-  todas,
-  trabalho,
-  pessoal,
-  estudo,
-  tecnologia,
-  jardinagem,
-  culinaria,
-  arte,
-  musica,
-  jogos,
-  desporto,
-  mecanica,
-  roubo,
+  todas("Todas", enabled: true),
+  trabalho("Trabalho"),
+  pessoal("Pessoal"),
+  estudo("Estudo"),
+  tecnologia("Tecnologia"),
+  jardinagem("Jardinagem"),
+  culinaria("Culinária"),
+  arte("Arte"),
+  musica("Música"),
+  jogos("Jogos"),
+  desporto("Desporto"),
+  mecanica("Mecânica"),
+  roubo("Roubo");
+
+  const Category(
+    this.text, {
+    this.enabled = false,
+  });
+  final String text;
+  final bool enabled;
 }
