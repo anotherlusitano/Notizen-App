@@ -28,9 +28,13 @@ class _HomeActivityState extends State<HomeActivity> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(253, 231, 172, 1),
       appBar: AppBar(
-        title: Text("Tarefas"),
-        backgroundColor: Colors.blue,
+        title: Text(
+          "Tarefas",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Color.fromRGBO(195, 108, 71, 1),
         actions: [
           // HACK: we fetch the Todos again so when we go to another page it doesn't hide the DeleteButton
           // yes its bad code but this isn't a professional app so idc
@@ -51,7 +55,10 @@ class _HomeActivityState extends State<HomeActivity> {
 
                           setState(() {});
                         },
-                        icon: Icon(Icons.delete),
+                        icon: Icon(
+                          Icons.delete,
+                          color: Color.fromRGBO(159, 36, 30, 1),
+                        ),
                       )
                     : SizedBox();
               } else {
@@ -70,7 +77,7 @@ class _HomeActivityState extends State<HomeActivity> {
                 if (!context.mounted) return;
                 context.goNamed(Routes.login.name);
               },
-              icon: Icon(Icons.logout),
+              icon: Icon(Icons.logout, color: Colors.white),
             ),
           ),
         ],

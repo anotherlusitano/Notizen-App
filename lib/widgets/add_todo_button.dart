@@ -18,7 +18,7 @@ class AddTodoButton extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(5)),
           ),
         ),
-        backgroundColor: WidgetStatePropertyAll(Colors.lightBlue),
+        backgroundColor: WidgetStatePropertyAll(Color.fromRGBO(195, 108, 71, 1)),
       ),
       child: Text(
         "+",
