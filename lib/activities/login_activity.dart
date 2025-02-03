@@ -105,7 +105,7 @@ class _LoginActivityState extends State<LoginActivity> {
                     }
 
                     if (!context.mounted) return;
-                    SnackMsg.showError(context, 'Palavra-passe ou username errado!');
+                    SnackMsg.showError(context, 'Verifique se a password ou o username estão certos!');
                   },
                   icon: Icon(
                     Icons.login,
