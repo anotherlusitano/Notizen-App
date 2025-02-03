@@ -30,10 +30,14 @@ class _TodoActivityState extends State<TodoActivity> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(253, 231, 172, 1),
       appBar: AppBar(
-        title: Text("Criar Tarefa"),
+        title: Text(
+          "Criar Tarefa",
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
-        backgroundColor: Colors.blue,
+        backgroundColor: Color.fromRGBO(195, 108, 71, 1),
         foregroundColor: Colors.white,
         leading: Padding(
           padding: const EdgeInsets.only(right: 10.0),
@@ -59,6 +63,9 @@ class _TodoActivityState extends State<TodoActivity> {
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: "Insira a tarefa...",
+                    focusedBorder: OutlineInputBorder(),
+                    fillColor: Colors.white,
+                    filled: true,
                     hintStyle: Theme.of(context).textTheme.displaySmall,
                   ),
                 ),
@@ -72,6 +79,14 @@ class _TodoActivityState extends State<TodoActivity> {
                     label: value,
                   );
                 }).toList(),
+                inputDecorationTheme: InputDecorationTheme(
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  focusedBorder: OutlineInputBorder(),
+                  fillColor: Colors.white,
+                  filled: true,
+                ),
                 label: Text("Categoria"),
                 onSelected: (String? value) {
                   category = value!;
@@ -98,8 +113,21 @@ class _TodoActivityState extends State<TodoActivity> {
                       pathParameters: {'username': widget.todoOwner!},
                     );
                   },
-                  icon: Icon(Icons.create),
-                  label: Text("Criar tarefa"),
+                  icon: Icon(
+                    Icons.create,
+                    color: Color.fromRGBO(195, 108, 71, 1),
+                  ),
+                  label: Text(
+                    "Criar tarefa",
+                    style: TextStyle(
+                      color: Color.fromRGBO(195, 108, 71, 1),
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.resolveWith(
+                      (states) => Colors.white,
+                    ),
+                  ),
                 ),
               ),
             ],
