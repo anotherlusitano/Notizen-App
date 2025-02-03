@@ -2,15 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:notizen/data/categories.dart';
 import 'package:notizen/widgets/category_box.dart';
 
-class CategoryFilter extends StatelessWidget {
+class CategoryFilter extends StatefulWidget {
   final Function callback;
 
-  CategoryFilter({
+  const CategoryFilter({
     super.key,
     required this.callback,
   });
 
-  final List<String> categories = Category.values.map((e) => e.name).toList();
+  @override
+  State<CategoryFilter> createState() => _CategoryFilterState();
+}
+
+class _CategoryFilterState extends State<CategoryFilter> {
+  final List<Category> categories = Category.values.toList();
+  final List<bool> enabledList = Category.values.map((category) => category.enabled).toList();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +26,20 @@ class CategoryFilter extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
         itemBuilder: (BuildContext context, int index) {
-          return CategoryBox(text: categories[index], selectCategory: callback);
+          return GestureDetector(
+            onTap: () {
+              setState(() {
+                enabledList.fillRange(0, enabledList.length, false);
+                enabledList[index] = true;
+                widget.callback(categories[index].name);
+              });
+            },
+            child: CategoryBox(
+              enabled: enabledList[index],
+              category: categories[index],
+              selectCategory: widget.callback,
+            ),
+          );
         },
       ),
     );
