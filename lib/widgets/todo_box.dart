@@ -80,18 +80,27 @@ class _TodoBoxState extends State<TodoBox> {
     return showDialog(
       context: context,
       builder: (BuildContext context) => Dialog(
+        backgroundColor: Color.fromRGBO(195, 108, 71, 1),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: 20.0),
-            Text("Editar tarefa"),
+            Text(
+              "Editar tarefa",
+              style: TextStyle(color: Colors.white),
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 controller: textController,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  focusedBorder: OutlineInputBorder(),
+                  fillColor: Colors.white,
+                  filled: true,
                   hintText: "Insira a tarefa...",
                   hintStyle: Theme.of(context).textTheme.displaySmall,
                 ),
@@ -106,7 +115,14 @@ class _TodoBoxState extends State<TodoBox> {
                   label: value,
                 );
               }).toList(),
-              label: Text("Categoria"),
+              inputDecorationTheme: InputDecorationTheme(
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
+                focusedBorder: OutlineInputBorder(),
+                fillColor: Colors.white,
+                filled: true,
+              ),
               onSelected: (String? value) {
                 category = value!;
                 setState(() {});
@@ -129,7 +145,12 @@ class _TodoBoxState extends State<TodoBox> {
 
                 setState(() {});
               },
-              child: const Text('Guardar'),
+              child: const Text(
+                'Guardar',
+                style: TextStyle(
+                  color: Color.fromRGBO(253, 231, 172, 1),
+                ),
+              ),
             ),
           ],
         ),
