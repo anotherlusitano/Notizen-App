@@ -22,7 +22,7 @@ class UsersRepository {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT NOT NULL,
             password TEXT NOT NULL,
-            loggenIn BOOLEAN NOT NULL
+            loggedIn BOOLEAN NOT NULL
           );
           ''',
         );
@@ -56,7 +56,7 @@ class UsersRepository {
 
     final db = await initDatabase();
 
-    user.loggenIn = 1;
+    user.loggedIn = 1;
 
     await db.update(
       'users',
@@ -71,7 +71,7 @@ class UsersRepository {
   Future<void> logoutLocalAccount(User user) async {
     final db = await initDatabase();
 
-    user.loggenIn = 0;
+    user.loggedIn = 0;
 
     await db.update(
       'users',
@@ -84,14 +84,14 @@ class UsersRepository {
   Future<User?> anyoneLoggedIn() async {
     final db = await initDatabase();
 
-    List<Map> result = await db.rawQuery('SELECT * FROM users WHERE loggenIn=1');
+    List<Map> result = await db.rawQuery('SELECT * FROM users WHERE loggedIn=1');
 
     User? user;
     for (var row in result) {
       user = User(
         row['username'],
         row['password'],
-        row['loggenIn'],
+        row['loggedIn'],
       );
     }
 
@@ -108,7 +108,7 @@ class UsersRepository {
       user = User(
         row['username'],
         row['password'],
-        row['loggenIn'],
+        row['loggedIn'],
       );
     }
 

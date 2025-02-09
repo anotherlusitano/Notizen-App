@@ -4,15 +4,15 @@ import 'dart:convert';
 class User {
   String username;
   String password;
-  int loggenIn = 0;
+  int loggedIn = 0;
 
-  User(this.username, this.password, this.loggenIn);
+  User(this.username, this.password, this.loggedIn);
 
   Map<String, Object?> toMap() {
     return {
       'username': username,
       'password': password,
-      'loggenIn': loggenIn,
+      'loggedIn': loggedIn,
     };
   }
 
@@ -23,6 +23,6 @@ class User {
 
   @override
   String toString() {
-    return 'User(username: $username, password: $password, loggenIn: $loggenIn)';
+    return 'User(username: $username, password: $password, loggedIn: $loggedIn)';
   }
 }
