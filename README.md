@@ -18,6 +18,33 @@ O Notizen é uma aplicação Android para gestão de tarefas, criada como trabal
 | 📑 Divisão por Categorias              | Acesse todas as tarefas de uma determinada categoria                                           |
 | 🔒 Tarefas Isoladas | Cada utilizador tem as suas próprias tarefas                           |
 
+## UI
+<details>
+  <summary>Página de Login</summary>
+  <img src="./assets/login-page.png" height=600 width=300 />
+  <img src="./assets/login-page2.png" height=600 width=300 />
+</details>
+<details>
+  <summary>Página de Sign Up</summary>
+  <img src="./assets/signup-page.png" height=600 width=300 />
+  <img src="./assets/signup-page2.png" height=600 width=300 />
+</details>
+<details>
+  <summary>Página Home</summary>
+  <img src="./assets/home-page.png" height=600 width=300 />
+  <img src="./assets/home-page2.png" height=600 width=300 />
+</details>
+<details>
+  <summary>Página de Editar Tarefa</summary>
+  <img src="./assets/edit-todo-popup.png" height=600 width=300 />
+  <img src="./assets/edit-todo-popup2.png" height=600 width=300 />
+</details>
+<details>
+  <summary>Página de Criar Tarefa</summary>
+  <img src="./assets/create-todo-page.png" height=600 width=300 />
+  <img src="./assets/create-todo-page2.png" height=600 width=300 />
+</details>
+
 ## Instalação
 
 A forma mais fácil de instalar esta aplicação é através da [instalação do apk](https://github.com/anotherlusitano/Notizen-App/releases/download/v1.0.0/notizen.apk).
