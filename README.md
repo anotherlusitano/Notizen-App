@@ -3,6 +3,11 @@
   <img src="./assets/notizen.png" height=300 width=300 />
 </div>
 
+<p>
+    <b>Português</b> |
+    <a href="https://github.com/anotherlusitano/Notizen-App/blob/main/README-en.md">English</a>
+</p>
+
 ## Descrição
 
 O Notizen é uma aplicação Android para gestão de tarefas, criada como trabalho final da disciplina de Computação Móvel.
@@ -49,7 +54,7 @@ O Notizen é uma aplicação Android para gestão de tarefas, criada como trabal
 
 A forma mais fácil de instalar esta aplicação é através da [instalação do apk](https://github.com/anotherlusitano/Notizen-App/releases/download/v1.0.0/notizen.apk).
 
-Mas, se não confiares num APK desconhecido da internet, podes sempre seguir estes passos para compilar o APK da aplicação:
+Alternativamente, podes compilar o APK seguindo os seguintes passos:
 
 1. **Clone do repositório**  
    No terminal, executa o seguinte comando:  
@@ -57,17 +62,16 @@ Mas, se não confiares num APK desconhecido da internet, podes sempre seguir est
    git clone https://github.com/anotherlusitano/Notizen-App.git
    ```  
 
-1. **Build do APK**  
-   Depois basta ir para dentro do repositório e dar build ao apk:  
+2. **Compilação do APK**  
+   Depois basta ir para dentro da pasta do projeto e compilar o apk:
    ```sh
    cd Notizen-App/
    flutter build apk --release
    ```
    O apk vai encontrar-se em `build/app/outputs/flutter-apk/app-release.apk`
 
-2. **Instalar o APK no dispositivo**  
-   A maneira mais fácil de instalares o apk é conectar o teu telemóvel Android via USB e executar o comando:  
+3. **Instalar o APK no dispositivo**
+   Por fim, com o dispositivo Android conectado via USB, basta executar o seguinte comando:
    ```sh
    flutter install apk
    ```
-   Mas, também podes só transferir o apk para o teu telemóvel e instala-lo aí.
