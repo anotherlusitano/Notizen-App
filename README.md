@@ -70,7 +70,7 @@ Alternativamente, podes compilar o APK seguindo os seguintes passos:
    ```
    O apk vai encontrar-se em `build/app/outputs/flutter-apk/app-release.apk`
 
-3. **Instalar o APK no dispositivo**
+3. **Instalar o APK no dispositivo**  
    Por fim, com o dispositivo Android conectado via USB, basta executar o seguinte comando:
    ```sh
    flutter install apk
